@@ -40,9 +40,6 @@
   include_tasks: static-shadow.yml
   when: htcondor_ce_enable_static_shadow
 
-- name: Enable argus authorisation
-  include_tasks: auth-argus.yml
-
 - name: Start HTCondor CE
   service:
     name: condor-ce
