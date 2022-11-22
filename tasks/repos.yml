@@ -2,6 +2,7 @@
 - name: Install HTCondor repository
   yum:
     name: "https://research.cs.wisc.edu/htcondor/repo/{{ condor_version }}/htcondor-release-current.el{{ ansible_distribution_major_version }}.noarch.rpm"
+    disable_gpg_check: yes
   when: ansible_facts['distribution_file_variety'] == "RedHat"
 - name: Enable powertools repo for CentOS8 variation.
   shell:
@@ -9,6 +10,3 @@
   when:
     - ansible_facts['distribution_file_variety'] == "RedHat"
     - ansible_facts['distribution_major_version'] == "8"
-
-
-
