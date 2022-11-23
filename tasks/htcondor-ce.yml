@@ -34,7 +34,7 @@
 - name: Enable Scitoken Auth.
   replace:
     path: /etc/condor-ce/config.d/01-ce-auth.conf
-    regexp: '#AUTH_SSL_'
+    regexp: '# AUTH_SSL_'
     replace: 'AUTH_SSL_' 
 
 - name: Enable static shadow
