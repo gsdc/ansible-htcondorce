@@ -14,6 +14,3 @@ htcondor_ce_benchmark_result: 10.00-HEP-SPEC06
 htcondor_ce_execution_env_cores: 16
 htcondor_ce_election_hosts:
   - "{{ ansible_fqdn }}"
-htcondor_ce_argus_server: argus.hephy.oeaw.ac.at
-htcondor_ce_argus_port: 8154
-htcondor_ce_argus_resourceid: http://authz-interop.org/xacml/resource/resource-type/ce

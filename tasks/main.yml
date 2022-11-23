@@ -7,6 +7,3 @@
 - name: Install HTCondor CE
   include_tasks: htcondor-ce.yml
 
-- name: Install BDII
-  include_tasks: bdii.yml
-  when: htcondor_ce_enable_bdii
