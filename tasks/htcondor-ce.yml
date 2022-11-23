@@ -31,10 +31,11 @@
       dest: config.d/61-job-routes.conf
   notify: reconfigure htcondor_ce
 
-- name: Configure HTCondor CE sysconfig
-  template:
-    src: condor-ce.sysconfig.j2
-    dest: /etc/sysconfig/condor-ce
+- name: Enable Scitoken Auth.
+  replace:
+    path: /etc/condor-ce/config.d/01-ce-auth.conf
+    regexp: '#AUTH_SSL_'
+    replace: 'AUTH_SSL_' 
 
 - name: Enable static shadow
   include_tasks: static-shadow.yml
