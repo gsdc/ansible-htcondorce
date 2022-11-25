@@ -1,0 +1,40 @@
+{{ ansible_managed | comment }}
+###############################################################################
+#
+# HTCondor-CE manual SciTokens authentication mappings
+#
+# This file will NOT be overwritten upon RPM upgrade.
+#
+###############################################################################
+
+# Authentication of SciTokens and WLCG tokens requires CA certificates
+# installed in the standard system (/etc/pki/tls/certs/ca-bundle.crt)
+# or Grid (/etc/grid-security/certificates) locations. If using Grid
+# certificates, be sure to set 'AUTH_SSL_*' configuration values as
+# appropriate in /etc/condor-ce/config.d/
+
+# To allow clients with SciToken or WLCG tokens to submit jobs to your
+# HTCondor-CE, add lines of the following format:
+#
+# SCITOKENS /<TOKEN ISSUER>,<TOKEN SUBJECT>/ <USERNAME>
+#
+# Where the second field (between the '/') should be a Perl Compatible
+# Regular Expression (PCRE). For example, to map all clients with
+# SciTokens issued by the OSG VO regardless of subject to the local
+# 'osg' user, add the following line to this file:
+#
+SCITOKENS /^https:\/\/scitokens.org\/osg-connect,.*/ osg
+{% if 'cms' in grid_vos %}
+## CMS ##
+# CMS pilots:
+SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,bad55f4e\-602c\-4e8d\-a5c5\-bd8ffb762113$/ cmspilot
+# SAM/ETF tests:
+SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,08ca855e\-d715\-410e\-a6ff\-ad77306e1763$/ cmslcgadmin
+# CMS ITB pilots:
+SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,490a9a36\-0268\-4070\-8813\-65af031be5a3$/ cmspilot
+## CMS ##
+# CMS LOCAL pilots:
+SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,07f75a9a\-bb78\-4735-938b\-7e61b2b62d5c$/ cmslocal
+# CMS ITB LOCAL pilots:
+SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,efbed8c1\-f9a7\-4063\-92f7\-f89c04ce04a3$/ cmslocal
+{% endif %}
