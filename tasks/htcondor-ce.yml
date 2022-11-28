@@ -44,7 +44,7 @@
 - name: Change LRMS Collector location if htcondor_ce_lrm_collector_is_set
   replace:
     path: /etc/condor-ce/config.d/02-ce-condor.conf
-    regexp: 'JOB_ROUTER_SCHEDD2_POOL=$(FULL_HOSTNAME):9618'
+    regexp: "JOB_ROUTER_SCHEDD2_POOL=*"
     replace: "JOB_ROUTER_SCHEDD2_POOL={{ htcondor_ce_lrms_collector }}:9618"
   when:
     - htcondor_ce_lrms_collector is defined
