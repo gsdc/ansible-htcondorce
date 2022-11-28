@@ -41,10 +41,6 @@
         src: scitokens.conf.j2
         dest: /etc/condor-ce/mapfiles.d/10-scitokens.conf
 
-- name: Enable static shadow
-  include_tasks: static-shadow.yml
-  when: htcondor_ce_enable_static_shadow
-
 - name: Start HTCondor CE
   service:
     name: condor-ce
