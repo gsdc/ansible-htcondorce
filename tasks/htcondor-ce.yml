@@ -1,5 +1,5 @@
 ---
-- name: Install pkgs
+- name: "Install HTCondor-CE packages for {{ htcondor_ce_batch_system }}"
   package:
     name:
       - htcondor-ce-client
@@ -7,7 +7,7 @@
       - htcondor-ce
       - "htcondor-ce-{{ htcondor_ce_batch_system }}"
 
-- name: Copy certificates
+- name: Copy host certificates to grid-security
   copy:
     src: "/etc/grid-security/host{{ item }}.pem"
     dest: "/etc/grid-security/condor{{ item }}.pem"
@@ -33,13 +33,16 @@
 
 - name: Enable Scitoken Auth
   block:
-    - replace:
+    - name: Uncomment AUTH_SSL syntax to enable SCITOKENS
+      replace:
         path: /etc/condor-ce/config.d/01-ce-auth.conf
         regexp: '# AUTH_SSL_'
         replace: 'AUTH_SSL_'
-    - template:
+    - name: Add scitoken id for VOs
+      template:
         src: scitokens.conf.j2
         dest: /etc/condor-ce/mapfiles.d/10-scitokens.conf
+  notify: reconfigure htcondor_ce
 
 - name: Change LRMS Collector location if htcondor_ce_lrm_collector_is_set
   replace:
@@ -49,6 +52,7 @@
   when:
     - htcondor_ce_lrms_collector is defined
     - htcondor_ce_batch_system == "condor"
+  notify: reconfigure htcondor_ce
 
 - name: Start HTCondor CE
   service:
