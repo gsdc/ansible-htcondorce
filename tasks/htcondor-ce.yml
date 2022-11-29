@@ -49,7 +49,6 @@
       template:
         src: scitokens.conf.j2
         dest: /etc/condor-ce/mapfiles.d/10-scitokens.conf
-  notify: reconfigure htcondor_ce
 
 - name: Change LRMS Collector location if htcondor_ce_lrm_collector_is_set
   lineinfile:
