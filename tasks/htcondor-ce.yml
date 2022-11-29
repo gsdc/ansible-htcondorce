@@ -33,7 +33,8 @@
 
 - name: Configure BDII for HTCondor-CE provider
   block:
-    - package:
+    - name: Install and configure htcondor-ce-bdii
+      package:
         name: htcondor-ce-bdii
         state: installed
     - template:
