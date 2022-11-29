@@ -31,6 +31,13 @@
       dest: config.d/61-job-routes.conf
   notify: reconfigure htcondor_ce
 
+- name: Configure BDII for HTCondor-CE provider
+  template:
+    src: ce-bdii.conf.j2
+    dest: "/etc/condor-ce/06-ce-bdii.conf"
+  when: htcondor_ce_enable_bdii 
+  notify: reconfigure htcondor_ce
+
 - name: Enable Scitoken Auth
   block:
     - name: Uncomment AUTH_SSL syntax to enable SCITOKENS
