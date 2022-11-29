@@ -32,11 +32,16 @@
   notify: reconfigure htcondor_ce
 
 - name: Configure BDII for HTCondor-CE provider
-  template:
-    src: ce-bdii.conf.j2
-    dest: "/etc/condor-ce/06-ce-bdii.conf"
-  when: htcondor_ce_enable_bdii 
-  notify: reconfigure htcondor_ce
+  block:
+    - package:
+        name: htcondor-ce-bdii
+        state: installed
+    - template:
+        src: ce-bdii.conf.j2
+        dest: "/etc/condor-ce/06-ce-bdii.conf"
+      when: htcondor_ce_enable_bdii 
+      notify: reconfigure htcondor_ce
+
 
 - name: Enable Scitoken Auth
   block:
