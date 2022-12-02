@@ -1,12 +1,4 @@
 ---
-- name: "Install HTCondor-CE packages for {{ htcondor_ce_batch_system }}"
-  package:
-    name:
-      - htcondor-ce-client
-      - htcondor-ce-view
-      - htcondor-ce
-      - "htcondor-ce-{{ htcondor_ce_batch_system }}"
-
 - name: Copy host certificates to grid-security
   copy:
     src: "/etc/grid-security/host{{ item }}.pem"

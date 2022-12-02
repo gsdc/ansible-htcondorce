@@ -1,0 +1,5 @@
+---
+- name: Install HTCondor-CE Package
+  include_tasks: "install.yml"
+- name: Configure HTCondor-CE Package
+  include_tasks: "config.yml"

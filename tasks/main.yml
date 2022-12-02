@@ -4,6 +4,6 @@
   include_tasks: repos.yml
   when: htcondor_ce_repo_install
 
-- name: Install HTCondor CE
-  include_tasks: htcondor-ce.yml
+- name: Prepare HTCondor CE system
+  include_tasks: "{{ step }}.yml"
 
