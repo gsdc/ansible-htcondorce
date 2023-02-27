@@ -1,7 +1,7 @@
 ---
 # defaults file for KISTI GSDC
 step: "default"
-condor_version: "10.0"
+condor_version: "9.0"
 htcondor_ce_repo_install: true
 htcondor_ce_repo_development_enable: false
 htcondor_ce_batch_system: condor
