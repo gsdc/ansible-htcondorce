@@ -1,4 +1,4 @@
-{% set condor_major_version = condor_version.split(".")[0] %}
+{% set condor_major_version = condor_version.split(".")[0] | int %}
 
 {% if condor_major_version >= 10 %}
 SCHEDD.SEC_DAEMON_AUTHENTICATION_METHODS = IDTOKENS,SCITOKENS,SSL,GSI,FS
