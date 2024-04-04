@@ -10,3 +10,9 @@
   when:
     - ansible_facts['distribution_file_variety'] == "RedHat"
     - ansible_facts['distribution_major_version'] == "8"
+- name: Enable crb repo for EL9 variation.
+  shell:
+    cmd: dnf config-manager --set-enabled crb
+  when:
+    - ansible_facts['distribution_file_variety'] == "RedHat"
+    - ansible_facts['distribution_major_version'] == "9"

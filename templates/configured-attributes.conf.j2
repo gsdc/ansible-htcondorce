@@ -7,7 +7,7 @@ CLASSAD_USER_LIBS=
 
 # Set appropriate place to route.
 JOB_ROUTER_SCHEDD2_NAME = {{ ansible_fqdn }}
-JOB_ROUTER_SCHEDD2_POOL = {{ htcondor_ce_pool_collector_str }}
+JOB_ROUTER_SCHEDD2_POOL = {{ htcondor_ce_lrms_collector }}:9618
 
 # No reason to hide jobs from view on CE
 CONDOR_Q_ONLY_MY_JOBS = False

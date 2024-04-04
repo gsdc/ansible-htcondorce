@@ -18,7 +18,7 @@
     - src: ce-site-security.conf.j2
       dest: config.d/59-site-security.conf
     - src: configured-attributes.conf.j2
-      dest: 60-configured-attributes.conf
+      dest: config.d/60-configured-attributes.conf
     - src: job-routes.conf.j2
       dest: config.d/61-job-routes.conf
   notify: reconfigure htcondor_ce
@@ -31,7 +31,7 @@
         state: installed
     - template:
         src: ce-bdii.conf.j2
-        dest: "/etc/condor-ce/config.d/06-ce-bdii.conf"
+        dest: "/etc/condor/config.d/99-ce-bdii.conf"
       when: htcondor_ce_enable_bdii 
       notify: reconfigure htcondor_ce
 
@@ -47,6 +47,19 @@
       template:
         src: scitokens.conf.j2
         dest: /etc/condor-ce/mapfiles.d/10-scitokens.conf
+      notify: reconfigure htcondor_ce
+
+- name: Enable SSL Auth.
+  block:
+    - name: Create ssl-auth.conf for SSL auth
+      template:
+        src: ssl-auth.conf.j2
+        dest: /etc/condor-ce/config.d/90-ssl-auth.conf
+    - name: Add SSL mapping for X509 DN
+      template:
+        src: ssl.conf.j2
+        dest: /etc/condor-ce/mapfiles.d/15-ssl.conf
+      notify: reconfigure htcondor_ce
 
 - name: Change LRMS Collector location if htcondor_ce_lrm_collector_is_set
   lineinfile:
