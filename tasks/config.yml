@@ -18,7 +18,7 @@
     - src: ce-site-security.conf.j2
       dest: config.d/59-site-security.conf
     - src: configured-attributes.conf.j2
-      dest: 60-configured-attributes.conf
+      dest: config.d/60-configured-attributes.conf
     - src: job-routes.conf.j2
       dest: config.d/61-job-routes.conf
   notify: reconfigure htcondor_ce
