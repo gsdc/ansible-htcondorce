@@ -23,20 +23,19 @@
 # SciTokens issued by the OSG VO regardless of subject to the local
 # 'osg' user, add the following line to this file:
 #
-SCITOKENS /^https:\/\/scitokens.org\/osg-connect,.*/ osg
 {% if 'cms' in grid_vos %}
 ## CMS ##
 # CMS pilots:
-SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,bad55f4e\-602c\-4e8d\-a5c5\-bd8ffb762113$/ cmspilot
+SCITOKENS /^https\:\/\/cms\-auth(\.web)?\.cern\.ch\/,bad55f4e\-602c\-4e8d\-a5c5\-bd8ffb762113$/ pilcms10
 # SAM/ETF tests:
-SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,08ca855e\-d715\-410e\-a6ff\-ad77306e1763$/ cmslcgadmin
+SCITOKENS /^https\:\/\/cms\-auth(\.web)?\.cern\.ch\/,08ca855e\-d715\-410e\-a6ff\-ad77306e1763$/ sgmcms55
 # CMS ITB pilots:
-SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,490a9a36\-0268\-4070\-8813\-65af031be5a3$/ cmspilot
+SCITOKENS /^https\:\/\/cms\-auth(\.web)?\.cern\.ch\/,490a9a36\-0268\-4070\-8813\-65af031be5a3$/ cms001
 ## CMS ##
 # CMS LOCAL pilots:
-SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,07f75a9a\-bb78\-4735-938b\-7e61b2b62d5c$/ cmslocal
+SCITOKENS /^https\:\/\/cms\-auth(\.web)?\.cern\.ch\/,07f75a9a\-bb78\-4735-938b\-7e61b2b62d5c$/ cms010
 # CMS ITB LOCAL pilots:
-SCITOKENS /^https\:\/\/cms\-auth\.web\.cern\.ch\/,efbed8c1\-f9a7\-4063\-92f7\-f89c04ce04a3$/ cmslocal
+SCITOKENS /^https\:\/\/cms\-auth(\.web)?\.cern\.ch\/,efbed8c1\-f9a7\-4063\-92f7\-f89c04ce04a3$/ cms011
 {% endif %}
 
 {% if 'ligo' in grid_vos %}
@@ -44,7 +43,13 @@ SCITOKENS /^https\:\/\/scitokens\.org\/ligo,/ ligopilot
 {% endif %}
 
 {% if 'alice' in grid_vos %}
+SCITOKENS /^https:\/\/alice-auth(\.web)?\.cern\.ch\/,a4f952ab-6e43-059c-c530-80df119a018b$/ sgmalit1_01
+SCITOKENS /^https:\/\/alice-auth(\.web)?\.cern\.ch\/,79a94edc-20c0-f95c-9f93-860837a4e1c9$/ ali1_04
 {% endif %}
+{% if 'ops' in grid_vos %}
+SCITOKENS /^https:\/\/scitokens.org\/osg-connect,.*/ osg
+{% endif %}
+
 
 {% if 'test' in grid_vos %}
 {% endif %}

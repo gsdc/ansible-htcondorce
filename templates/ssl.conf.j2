@@ -1,23 +1,24 @@
 {{ ansible_managed | comment }}
 {% if 'ops' in grid_vos %}
-SSL     "/DC=EU/DC=EGI/C=GR/O=Robots/O=Greek Research and Technology Network/CN=Robot:argo-egi@grnet.gr" opslcgadmin
-SSL     "/DC=EU/DC=EGI/C=HR/O=Robots/O=SRCE/CN=Robot:argo-egi@cro-ngi.hr" opspilot
-SSL     "/DC=EU/DC=EGI/C=GR/O=Robots/O=Greek Research and Technology Network/CN=Robot:argo-secmon@grnet.gr" opslcgadmin
+SSL     "/DC=EU/DC=EGI/C=GR/O=Robots/O=Greek Research and Technology Network/CN=Robot:argo-egi@grnet.gr" ops02
+SSL     "/DC=EU/DC=EGI/C=HR/O=Robots/O=SRCE/CN=Robot:argo-egi@cro-ngi.hr" ops05
+SSL     "/DC=EU/DC=EGI/C=GR/O=Robots/O=Greek Research and Technology Network/CN=Robot:argo-secmon@grnet.gr" ops07
 {% endif %}
 
 {% if 'cms' in grid_vos %}
 ## CMS ##
-SSL	"/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=sciaba/CN=430796/CN=Andrea Sciaba"	cmslcgadmin
-SSL	"/DC=ch/DC=cern/OU=computers/CN=cmspilot02/vocms080.cern.ch" cmspilot
+SSL	"/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=sciaba/CN=430796/CN=Andrea Sciaba"	cms010
+#SSL	"/DC=ch/DC=cern/OU=computers/CN=cmspilot02/vocms080.cern.ch" cmspilot
 {% endif %}
 
 {% if 'ligo' in grid_vos %}
 {% endif %}
 
 {% if 'alice' in grid_vos %}
+SSL "/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=litmaath/CN=410032/CN=Maarten Litmaath" ali1_04
 {% endif %}
 
 {% if 'local' in grid_vos %}
 ## Local For Test ##
-SSL     "/C=KR/O=KISTI/O=KISTI/CN=58079576 Geonmo Ryu" geonmo
+SSL     "/C=KR/O=KISTI/O=KISTI/CN=58079576 Geonmo Ryu" geonmo2
 {% endif %}

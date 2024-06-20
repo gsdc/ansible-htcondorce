@@ -3,6 +3,7 @@
   package:
     name:
       - htcondor-ce-client
+      - htcondor-ce-apel
       - htcondor-ce-view
       - htcondor-ce
       - "htcondor-ce-{{ htcondor_ce_batch_system }}"
