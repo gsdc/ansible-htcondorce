@@ -9,11 +9,21 @@
   loop:
     - cert
     - key
+- name: Chmod condor keys
+  file:
+    path: /etc/grid-security/condorcert.pem
+    mode: 644
+- file:
+    path: /etc/grid-security/condorkey.pem
+    mode: 400
 
 - name: Configure HTCondor CE
   template:
     src: "{{ item.src }}"
     dest: "/etc/condor-ce/{{ item.dest }}"
+    owner: condor
+    group: condor
+    mode: 644
   loop:
     - src: ce-site-security.conf.j2
       dest: config.d/59-site-security.conf
@@ -32,6 +42,9 @@
     - template:
         src: ce-bdii.conf.j2
         dest: "/etc/condor/config.d/99-ce-bdii.conf"
+        owner: condor
+        group: condor
+        mode: 644
       when: htcondor_ce_enable_bdii 
       notify: reconfigure htcondor_ce
 
@@ -47,6 +60,9 @@
       template:
         src: scitokens.conf.j2
         dest: /etc/condor-ce/mapfiles.d/10-scitokens.conf
+        owner: condor
+        group: condor
+        mode: 644
       notify: reconfigure htcondor_ce
 
 - name: Enable SSL Auth.
@@ -55,10 +71,16 @@
       template:
         src: ssl-auth.conf.j2
         dest: /etc/condor-ce/config.d/90-ssl-auth.conf
+        owner: condor
+        group: condor
+        mode: 644
     - name: Add SSL mapping for X509 DN
       template:
         src: ssl.conf.j2
         dest: /etc/condor-ce/mapfiles.d/15-ssl.conf
+        owner: condor
+        group: condor
+        mode: 644
       notify: reconfigure htcondor_ce
 
 - name: Change LRMS Collector location if htcondor_ce_lrm_collector_is_set
