@@ -48,6 +48,13 @@
       when: htcondor_ce_enable_bdii 
       notify: reconfigure htcondor_ce
 
+- name: Configure APEL
+  template:
+    src: apelparser.cfg.j2
+    dest: /etc/apel/parser.cfg
+    owner: root
+    group: root
+    mode: "0600" 
 
 - name: Enable Scitoken Auth
   block:

@@ -19,3 +19,8 @@ grid_vos:
   - local
 htcondor_ce_election_hosts:
   - "{{ ansible_fqdn }}"
+apeldb_hostname: ""
+apeldb_name: ""
+apeldb_user: ""
+apeldb_password: ""
+
