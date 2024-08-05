@@ -97,6 +97,7 @@
     line: "JOB_ROUTER_SCHEDD2_POOL={{ htcondor_ce_lrms_collector }}:9618"
   when:
     - htcondor_ce_lrms_collector is defined
+    - htcondor_ce_lrms_collector is string
     - htcondor_ce_batch_system == "condor"
   notify: reconfigure htcondor_ce
 

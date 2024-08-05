@@ -13,6 +13,8 @@ JOB_ROUTER_SCHEDD2_POOL = {{ htcondor_ce_lrms_collector | map('regex_replace','$
 JOB_ROUTER_SCHEDD2_POOL = {{ htcondor_ce_lrms_collector }}:9618
 {% endif %}
 
+USE_VOMS_ATTRIBUTES = True
+
 # No reason to hide jobs from view on CE
 CONDOR_Q_ONLY_MY_JOBS = False
 
