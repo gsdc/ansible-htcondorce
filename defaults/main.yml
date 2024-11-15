@@ -1,12 +1,13 @@
 ---
 # defaults file for KISTI GSDC
 step: "default"
-condor_version: "23.0"
+condor_version: "24.0"
 htcondor_ce_repo_install: true
 htcondor_ce_repo_development_enable: false
 htcondor_ce_batch_system: condor
 htcondor_ce_lrms_collector: "$(FULL_HOSTNAME)"
 htcondor_ce_enable_bdii: true
+htcondor_ce_enable_apel: false
 htcondor_ce_uid_domain: "{{ ansible_domain }}"
 htcondor_ce_condor_view_hosts: []
 htcondor_ce_pool_collector_str: ''

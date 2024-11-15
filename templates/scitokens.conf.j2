@@ -50,6 +50,11 @@ SCITOKENS /^https:\/\/alice-auth(\.web)?\.cern\.ch\/,79a94edc-20c0-f95c-9f93-860
 SCITOKENS /^https:\/\/scitokens.org\/osg-connect,.*/ osg
 {% endif %}
 
+{% if 'belle' in grid_vos %}
+SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot1 - UEDA Ikuo"
+SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot - UEDA Ikuo"
+SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot 2 - UEDA Ikuo"
+{% endif %}
 
 {% if 'test' in grid_vos %}
 {% endif %}

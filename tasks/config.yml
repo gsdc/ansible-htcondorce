@@ -55,6 +55,7 @@
     owner: root
     group: root
     mode: "0600" 
+  when: htcondor_ce_enable_apel 
 
 - name: Enable Scitoken Auth
   block:
