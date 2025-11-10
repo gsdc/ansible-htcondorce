@@ -10,7 +10,8 @@
 JOB_ROUTER_USE_DEPRECATED_ROUTER_ENTRIES = False
 
 JOB_ROUTER_ROUTE_Condor_Pool @=jrt
-  UNIVERSE VANILLA
+  #UNIVERSE VANILLA
+  TargetUniverse = 5
   #REQUIREMENTS Owner == "cms"
   #REQUIREMENTS regexp("\/cms\/Role\=pilot", x509UserProxyFirstFQAN)
   #REQUIREMENTS target.AuthTokenSubject == "bad55f4e-602c-4e8d-a5c5-bd8ffb762113"
