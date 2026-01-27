@@ -1,22 +1,27 @@
 ---
-- name: Copy host certificates to grid-security
-  copy:
-    src: "/etc/grid-security/host{{ item }}.pem"
-    dest: "/etc/grid-security/condor{{ item }}.pem"
-    remote_src: true
-    owner: condor
-    group: condor
-  loop:
-    - cert
-    - key
-- name: Chmod condor keys
-  file:
-    path: /etc/grid-security/condorcert.pem
-    mode: "0644"
-- file:
-    path: /etc/grid-security/condorkey.pem
-    mode: "0400"
-
+- set_fact:
+    is_systemd_running: "{{ (ansible_facts.proc_1_comm | default('')) == 'systemd' }}"
+- name: Block for certs jobs
+  block:
+  - name: Copy host certificates to grid-security
+    copy:
+      src: "/etc/grid-security/host{{ item }}.pem"
+      dest: "/etc/grid-security/condor{{ item }}.pem"
+      remote_src: true
+      owner: condor
+      group: condor
+    loop:
+      - cert
+      - key
+  - name: Chmod condor keys
+    file:
+      path: /etc/grid-security/condorcert.pem
+      mode: "0644"
+  - file:
+      path: /etc/grid-security/condorkey.pem
+      mode: "0400"
+  when: htcondor_ce_certs_setup 
+ 
 - name: Configure HTCondor CE
   template:
     src: "{{ item.src }}"
@@ -108,3 +113,4 @@
     state: started
     enabled: true
   register: service_condor_ce
+  when: base_system != "container"
