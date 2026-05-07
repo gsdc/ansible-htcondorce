@@ -1,17 +1,44 @@
 {{ ansible_managed | comment }}
+
+{# 버전 판별 로직 분리 #}
+{%- set is_v24_plus = false -%}
+
+{# 1. Tag 체크: 숫자와 점만 남기고 비교 (예: "25.0-el9" -> "25.0") #}
+{%- if condor_container_tag is defined and condor_container_tag -%}
+    {%- set tag_ver = condor_container_tag | string | regex_replace('[xX]', '0') | regex_replace('^([0-9.]+).*', '\\1') -%}
+    {%- if tag_ver is version('24.0', '>=') -%}
+        {%- set is_v24_plus = true -%}
+    {%- endif -%}
+{%- endif -%}
+
+{# 2. Version 체크: Tag에서 미충족 시 수행 (예: "24.x" -> "24.0") #}
+{%- if not is_v24_plus and condor_version is defined and condor_version != "default" -%}
+    {%- set ver_clean = condor_version | string | regex_replace('[xX]', '0') | regex_replace('[^0-9.]', '') -%}
+    {%- if ver_clean is version('24.0', '>=') -%}
+        {%- set is_v24_plus = true -%}
+    {%- endif -%}
+{%- endif -%}
+
+{# --- 이하 VO 설정 시작 --- #}
+
 {% if 'ops' in grid_vos %}
+## EGI OPS##
+{%- if not is_v24_plus -%}
+## if condor version is 23 or lower
 SSL     "/DC=EU/DC=EGI/C=GR/O=Robots/O=Greek Research and Technology Network/CN=Robot:argo-egi@grnet.gr" ops004
 SSL     "/DC=EU/DC=EGI/C=HR/O=Robots/O=SRCE/CN=Robot:argo-egi@cro-ngi.hr" ops005
 SSL     "/DC=EU/DC=EGI/C=GR/O=Robots/O=Greek Research and Technology Network/CN=Robot:argo-secmon@grnet.gr" ops007
+{%- else -%}
+## if condor version is 24 or higher (Regex Map)
+SSL /\/DC=EU\/DC=EGI\/C=GR\/O=Robots\/O=Greek Research and Technology Network\/CN=Robot:argo-egi@grnet.gr,.*/ ops004
+SSL /\/DC=EU\/DC=EGI\/C=HR\/O=Robots\/O=SRCE\/CN=Robot:argo-egi@cro-ngi.hr,.*/ ops005
+SSL /\/DC=EU\/DC=EGI\/C=GR\/O=Robots\/O=Greek Research and Technology Network\/CN=Robot:argo-secmon@grnet.gr,.*/ ops007
+{%- endif %}
 {% endif %}
 
 {% if 'cms' in grid_vos %}
 ## CMS ##
-SSL	"/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=sciaba/CN=430796/CN=Andrea Sciaba"	cms010
-#SSL	"/DC=ch/DC=cern/OU=computers/CN=cmspilot02/vocms080.cern.ch" cmspilot
-{% endif %}
-
-{% if 'ligo' in grid_vos %}
+SSL "/DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=sciaba/CN=430796/CN=Andrea Sciaba" cms010
 {% endif %}
 
 {% if 'alice' in grid_vos %}
