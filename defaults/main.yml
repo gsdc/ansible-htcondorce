@@ -1,8 +1,10 @@
 ---
 # defaults file for KISTI GSDC
 step: "default"
+base_system: "baremetal"
 condor_version: "25.0"
 condor_repo_install: true
+htcondor_ce_certs_setup: true
 htcondor_ce_repo_install: true
 htcondor_ce_repo_development_enable: false
 htcondor_ce_batch_system: condor
