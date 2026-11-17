@@ -50,8 +50,10 @@
         owner: condor
         group: condor
         mode: "0644"
-      when: htcondor_ce_enable_bdii 
       notify: reconfigure htcondor_ce
+  # 패키지 설치까지 block 전체에 조건을 건다 (예전에는 템플릿에만 걸려 있어 BDII 를 꺼도
+  # htcondor-ce-bdii 를 설치하려 했다. OSG 26 에는 이 패키지가 없다).
+  when: htcondor_ce_enable_bdii
 
 - name: Configure APEL
   template:
