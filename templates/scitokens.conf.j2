@@ -67,9 +67,14 @@ SCITOKENS /^https:\/\/iam-belle\.cloud\.cnaf\.infn\.it\/,8e9fba47-bac8-44d6-bf02
 SCITOKENS /^https:\/\/iam-belle\.cloud\.cnaf\.infn\.it\/,f3ff9284-82a4-457f-9530-270b0ad283b2/ prdbelle
 SCITOKENS /^https:\/\/iam-belle\.cloud\.cnaf\.infn\.it\/,2673b85a-2067-4cd2-a6c8-710bae77b896/ belle
 
-SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot1 - UEDA Ikuo"
-SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot - UEDA Ikuo"
-SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot 2 - UEDA Ikuo"
+#BelleDIRAC pilot 인증서 (X.509) - 매핑 계정이 빠져 있어 매핑이 안 되던 것을 수정 (2026-11-17)
+SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot1 - UEDA Ikuo"	prdbelle
+SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot - UEDA Ikuo"	prdbelle
+SSL "/C=JP/O=KEK/OU=CRC/CN=Robot: BelleDIRAC Pilot 2 - UEDA Ikuo"	prdbelle
+#VOMS FQAN 기반 매핑 - belle-ce2 운영 설정에서 옮김 (2026-11-17)
+SSL /.*,\/belle\/Role=production.*/	prdbelle
+SSL /.*,\/belle\/Role=lcgadmin.*/	prdbelle
+SSL /.*,\/belle.*/	belle
 {% endif %}
 
 {% if 'test' in grid_vos %}
