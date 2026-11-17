@@ -1,4 +1,10 @@
+{# condor_version 이 "default"(배포판/OSG 저장소의 기본 버전)이면 최신 버전으로 본다.
+   예전에는 int("default") = 0 이 되어 SSL/SciTokens 인증 설정 전체가 빠졌다. #}
+{% if condor_version | string == "default" %}
+{% set condor_major_version = 99 %}
+{% else %}
 {% set condor_major_version = condor_version.split(".")[0] | int %}
+{% endif %}
 
 {% if condor_major_version >= 10 %}
 SCHEDD.SEC_DAEMON_AUTHENTICATION_METHODS = IDTOKENS,SCITOKENS,SSL,FS
